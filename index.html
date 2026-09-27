@@ -17,34 +17,34 @@
             background-position: center;
             padding: 20px 20px;
             text-align: center;
-            border-bottom: 2px solid #ff9900;
+            border-bottom: 2px solid #ff0000;
             position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        /* Menu Button Styling */
+        /* Menu Button Styling (Red Theme) */
         .menu-btn {
             background: #131c2e;
-            border: 1px solid #ff9900;
-            color: #ff9900;
+            border: 1px solid #ff0000;
+            color: #ff0000;
             padding: 8px 14px;
             font-size: 18px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
         }
-        .menu-btn:hover { background: #ff9900; color: #0b0f19; }
+        .menu-btn:hover { background: #ff0000; color: #0b0f19; }
 
         .header-title { margin: 0 auto; text-align: center; }
         .brand-logo {
             font-size: 24px;
             font-weight: 700;
-            color: #ff9900;
+            color: #ff0000;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255,153,0,0.4);
+            text-shadow: 0 0 15px rgba(255,0,0,0.4);
         }
         header p { font-size: 13px; color: #aaa; margin-top: 2px; }
 
@@ -60,7 +60,7 @@
             overflow-x: hidden;
             transition: 0.3s;
             padding-top: 60px;
-            border-right: 2px solid #ff9900;
+            border-right: 2px solid #ff0000;
         }
         .side-menu a {
             padding: 12px 25px;
@@ -71,54 +71,33 @@
             transition: 0.2s;
             border-bottom: 1px solid #1e293b;
         }
-        .side-menu a:hover { color: #0b0f19; background: #ff9900; font-weight: bold; }
+        .side-menu a:hover { color: #0b0f19; background: #ff0000; font-weight: bold; }
         .side-menu .close-btn {
             position: absolute;
             top: 10px;
             right: 20px;
             font-size: 30px;
-            color: #ff9900;
+            color: #ff0000;
             border: none;
             background: none;
             cursor: pointer;
         }
 
-        /* Controls Section (Search Bar) */
-        .controls-container {
-            max-width: 1100px;
-            margin: 25px auto 10px auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .search-box input {
-            width: 100%;
-            max-width: 400px;
-            padding: 10px 15px;
-            background: #131c2e;
-            border: 1px solid #334155;
-            color: #fff;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        .search-box input:focus { border-color: #ff9900; outline: none; }
-
         /* Container */
-        .container { max-width: 1100px; margin: 20px auto 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .container { max-width: 1100px; margin: 30px auto 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
 
-        /* Product Card with Neon Glow Effect */
+        /* Product Card - Border Removed, Red Glow Maintained */
         .card {
             background: #131c2e;
-            border: 1px solid #ff9900;
+            border: none; /* Border hata diya gaya hai */
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); /* Red Glow Effect */
             transition: all 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(255, 153, 0, 0.7);
-            border-color: #ff9900;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); /* Hover par tez Red Glow */
         }
         
         .main-img-container { position: relative; width: 100%; height: 190px; background: #000; }
@@ -143,20 +122,22 @@
         }
         .thumb-img:hover, .thumb-img.active-thumb {
             opacity: 1;
-            border-color: #ff9900;
+            border-color: #ff0000;
             transform: scale(1.05);
         }
 
         .card-content { padding: 15px 20px 20px 20px; }
         .card h3 { font-size: 20px; color: #fff; margin-bottom: 6px; }
         .card p { font-size: 13px; color: #94a3b8; margin-bottom: 12px; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        
+        .price-row { display: none; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .price { font-size: 20px; font-weight: 700; color: #10b981; }
 
         .btn-buy {
+            display: none;
             width: 100%;
-            background: #ff9900;
-            color: #0b0f19;
+            background: #ff0000;
+            color: #fff;
             border: none;
             padding: 10px;
             font-weight: bold;
@@ -165,7 +146,7 @@
             font-size: 14px;
             transition: 0.2s;
         }
-        .btn-buy:hover { background: #e68a00; }
+        .btn-buy:hover { background: #cc0000; }
 
         /* Order Section (Initially Hidden) */
         .order-container {
@@ -173,21 +154,21 @@
             max-width: 600px;
             margin: 40px auto;
             background: #131c2e;
-            border: 1px solid #ff9900;
+            border: 1px solid #ff0000;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(255,153,0,0.3);
+            box-shadow: 0 10px 30px rgba(255,0,0,0.3);
         }
-        .order-container h2 { text-align: center; color: #ff9900; margin-bottom: 20px; font-size: 24px; }
+        .order-container h2 { text-align: center; color: #ff0000; margin-bottom: 20px; font-size: 24px; }
         .upi-box {
             background: #0b0f19;
-            border-left: 4px solid #ff9900;
+            border-left: 4px solid #ff0000;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 4px;
             font-size: 14px;
         }
-        .upi-box code { color: #ff9900; font-weight: bold; }
+        .upi-box code { color: #ff0000; font-weight: bold; }
 
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #cbd5e1; }
@@ -200,23 +181,23 @@
             border-radius: 6px;
             font-size: 15px;
         }
-        .form-group input:focus { border-color: #ff9900; outline: none; }
+        .form-group input:focus { border-color: #ff0000; outline: none; }
         
         .selected-product-box {
             background: #0b0f19;
-            border: 1px solid #ff9900;
+            border: 1px solid #ff0000;
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 15px;
-            color: #ff9900;
+            color: #ff0000;
             font-weight: bold;
             text-align: center;
         }
 
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, #ff9900, #e68a00);
-            color: #0b0f19;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            color: #fff;
             padding: 14px;
             border: none;
             font-size: 16px;
@@ -236,9 +217,9 @@
     <!-- Side Menu Drawer -->
     <div id="sideMenu" class="side-menu">
         <button class="close-btn" onclick="closeNav()">&times;</button>
-        <a href="#" onclick="filterCategory('all'); closeNav();">🏠 All Products</a>
-        <a href="#" onclick="filterCategory('loco'); closeNav();">🚂 Locomotives</a>
-        <a href="#" onclick="filterCategory('coach'); closeNav();">🚃 Coaches</a>
+        <a href="#" onclick="filterCategory('all'); closeNav();">🏠 Home Gallery</a>
+        <a href="#" onclick="filterCategory('loco'); closeNav();">🚂 Locomotives (Store)</a>
+        <a href="#" onclick="filterCategory('coach'); closeNav();">🚃 Coaches (Store)</a>
     </div>
 
     <header>
@@ -252,13 +233,6 @@
         
         <div style="width: 50px;"></div>
     </header>
-
-    <!-- Search Bar -->
-    <div class="controls-container">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search locomotives or coaches..." onkeyup="filterProducts()">
-        </div>
-    </div>
 
     <!-- Products Showcase -->
     <div class="container" id="productContainer">
@@ -303,7 +277,7 @@
 
     </div>
 
-    <!-- Order & Checkout Form (Hidden until Buy Now is clicked) -->
+    <!-- Order & Checkout Form (Initially Hidden) -->
     <div class="order-container" id="checkoutSection">
         <h2>Secure Checkout</h2>
         <div class="upi-box">
@@ -311,7 +285,6 @@
             <p style="margin-top: 5px;"><b>Step 2:</b> Fill the transaction details below to claim your product file.</p>
         </div>
 
-        <!-- Yahan apna Formspree endpoint paste karna hai -->
         <form action="https://formspree.io/f/xoevkore" method="POST">
             
             <div class="form-group">
@@ -359,24 +332,27 @@
 
         function filterCategory(category) {
             let cards = document.getElementsByClassName('card');
+            let checkoutSec = document.getElementById('checkoutSection');
+            
+            if(category === 'all') {
+                checkoutSec.style.display = "none";
+                for (let card of cards) {
+                    card.style.display = "";
+                    card.querySelector('.price-row').style.display = "none";
+                    card.querySelector('.btn-buy').style.display = "none";
+                }
+                return;
+            }
+
             for (let i = 0; i < cards.length; i++) {
                 let cardCategory = cards[i].getAttribute('data-category');
-                if (category === 'all' || cardCategory === category) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
+                let priceRow = cards[i].querySelector('.price-row');
+                let buyBtn = cards[i].querySelector('.btn-buy');
 
-        function filterProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getAttribute('data-name');
-                if (name.includes(input)) {
+                if (cardCategory === category) {
                     cards[i].style.display = "";
+                    priceRow.style.display = "flex";
+                    buyBtn.style.display = "block";
                 } else {
                     cards[i].style.display = "none";
                 }
