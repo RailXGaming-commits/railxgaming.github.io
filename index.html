@@ -4,36 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RailX Gaming Official | MSTS 3D Store</title>
+    <!-- Custom Favicon -->
+    <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=64&q=80">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         body { background: #0b0f19; color: #fff; line-height: 1.6; }
         
         header {
-            background: linear-gradient(rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            padding: 50px 20px;
+            padding: 20px 20px;
             text-align: center;
             border-bottom: 2px solid #ff9900;
-        }
-        header h1 { font-size: 36px; color: #ff9900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,153,0,0.5); }
-        header p { font-size: 15px; color: #aaa; margin-top: 8px; }
-        .channel-tag { display: inline-block; background: #ff9900; color: #0b0f19; padding: 4px 14px; border-radius: 20px; font-weight: bold; margin-top: 12px; font-size: 13px; }
-
-        /* Controls Section (Search & Filter) */
-        .controls-container {
-            max-width: 1100px;
-            margin: 30px auto 10px auto;
-            padding: 0 20px;
+            position: relative;
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
             justify-content: space-between;
             align-items: center;
         }
+        
+        /* Menu Button Styling */
+        .menu-btn {
+            background: #131c2e;
+            border: 1px solid #ff9900;
+            color: #ff9900;
+            padding: 8px 14px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .menu-btn:hover { background: #ff9900; color: #0b0f19; }
+
+        .header-title { margin: 0 auto; text-align: center; }
+        .brand-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff9900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255,153,0,0.4);
+        }
+        header p { font-size: 13px; color: #aaa; margin-top: 2px; }
+
+        /* Side Menu (Drawer) Styling */
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background-color: #131c2e;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            border-right: 2px solid #ff9900;
+        }
+        .side-menu a {
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #cbd5e1;
+            display: block;
+            transition: 0.2s;
+            border-bottom: 1px solid #1e293b;
+        }
+        .side-menu a:hover { color: #0b0f19; background: #ff9900; font-weight: bold; }
+        .side-menu .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: #ff9900;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        /* Controls Section (Search Bar) */
+        .controls-container {
+            max-width: 1100px;
+            margin: 25px auto 10px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+        }
         .search-box input {
-            width: 280px;
+            width: 100%;
+            max-width: 400px;
             padding: 10px 15px;
             background: #131c2e;
             border: 1px solid #334155;
@@ -42,57 +102,81 @@
             font-size: 14px;
         }
         .search-box input:focus { border-color: #ff9900; outline: none; }
-        
-        .filter-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-        .filter-btn {
+
+        /* Container */
+        .container { max-width: 1100px; margin: 20px auto 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+
+        /* Product Card with Neon Glow Effect */
+        .card {
             background: #131c2e;
+            border: 1px solid #ff9900;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 153, 0, 0.7);
+            border-color: #ff9900;
+        }
+        
+        .main-img-container { position: relative; width: 100%; height: 190px; background: #000; }
+        .card-main-img { width: 100%; height: 100%; object-fit: cover; border-bottom: 2px solid #1e293b; }
+        
+        /* Thumbnail Switcher */
+        .thumbnail-gallery {
+            display: flex;
+            gap: 8px;
+            padding: 10px 12px 0 12px;
+            background: #131c2e;
+        }
+        .thumb-img {
+            width: 55px;
+            height: 35px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
             border: 1px solid #334155;
-            color: #cbd5e1;
-            padding: 8px 16px;
+            opacity: 0.6;
+            transition: 0.2s;
+        }
+        .thumb-img:hover, .thumb-img.active-thumb {
+            opacity: 1;
+            border-color: #ff9900;
+            transform: scale(1.05);
+        }
+
+        .card-content { padding: 15px 20px 20px 20px; }
+        .card h3 { font-size: 20px; color: #fff; margin-bottom: 6px; }
+        .card p { font-size: 13px; color: #94a3b8; margin-bottom: 12px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .price { font-size: 20px; font-weight: 700; color: #10b981; }
+
+        .btn-buy {
+            width: 100%;
+            background: #ff9900;
+            color: #0b0f19;
+            border: none;
+            padding: 10px;
+            font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s;
+            transition: 0.2s;
         }
-        .filter-btn:hover, .filter-btn.active {
-            background: #ff9900;
-            color: #0b0f19;
-            border-color: #ff9900;
-        }
+        .btn-buy:hover { background: #e68a00; }
 
-        /* Container */
-        .container { max-width: 1100px; margin: 20px auto 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-
-        /* Product Card */
-        .card {
-            background: #131c2e;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.2);
-            border-color: #ff9900;
-        }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 2px solid #1e293b; }
-        .card-content { padding: 20px; }
-        .card h3 { font-size: 20px; color: #fff; margin-bottom: 8px; }
-        .card p { font-size: 14px; color: #94a3b8; margin-bottom: 15px; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; }
-        .price { font-size: 20px; font-weight: 700; color: #10b981; }
-
-        /* Order Section */
+        /* Order Section (Initially Hidden) */
         .order-container {
+            display: none;
             max-width: 600px;
             margin: 40px auto;
             background: #131c2e;
-            border: 1px solid #1e293b;
+            border: 1px solid #ff9900;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(255,153,0,0.3);
         }
         .order-container h2 { text-align: center; color: #ff9900; margin-bottom: 20px; font-size: 24px; }
         .upi-box {
@@ -107,7 +191,7 @@
 
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 14px; color: #cbd5e1; }
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
             padding: 12px;
             background: #0b0f19;
@@ -116,10 +200,19 @@
             border-radius: 6px;
             font-size: 15px;
         }
-        .form-group input:focus, .form-group select:focus {
-            border-color: #ff9900;
-            outline: none;
+        .form-group input:focus { border-color: #ff9900; outline: none; }
+        
+        .selected-product-box {
+            background: #0b0f19;
+            border: 1px solid #ff9900;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            color: #ff9900;
+            font-weight: bold;
+            text-align: center;
         }
+
         .btn-submit {
             width: 100%;
             background: linear-gradient(135deg, #ff9900, #e68a00);
@@ -140,53 +233,78 @@
 </head>
 <body>
 
+    <!-- Side Menu Drawer -->
+    <div id="sideMenu" class="side-menu">
+        <button class="close-btn" onclick="closeNav()">&times;</button>
+        <a href="#" onclick="filterCategory('all'); closeNav();">🏠 All Products</a>
+        <a href="#" onclick="filterCategory('loco'); closeNav();">🚂 Locomotives</a>
+        <a href="#" onclick="filterCategory('coach'); closeNav();">🚃 Coaches</a>
+    </div>
+
     <header>
-        <h1>RailX Gaming Store</h1>
-        <p>High-Quality 3D Locomotives & Coaches for MSTS / OpenRails</p>
-        <div class="channel-tag">YouTube: @RailXGamingOfficial</div>
+        <!-- Menu Button on Left -->
+        <button class="menu-btn" onclick="openNav()">☰ Menu</button>
+        
+        <div class="header-title">
+            <div class="brand-logo">RailX Gaming Store</div>
+            <p>MSTS / OpenRails 3D Models</p>
+        </div>
+        
+        <div style="width: 50px;"></div>
     </header>
 
-    <!-- Search & Filter Bar -->
+    <!-- Search Bar -->
     <div class="controls-container">
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Search locomotives or coaches..." onkeyup="filterProducts()">
-        </div>
-        <div class="filter-btns">
-            <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
-            <button class="filter-btn" onclick="filterCategory('loco', this)">Locomotives</button>
-            <button class="filter-btn" onclick="filterCategory('coach', this)">Coaches</button>
         </div>
     </div>
 
     <!-- Products Showcase -->
     <div class="container" id="productContainer">
-        <!-- Product 1 -->
+        
+        <!-- Product 1: WAP-7 -->
         <div class="card" data-category="loco" data-name="wap-7 3d locomotive">
-            <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="WAP-7">
+            <div class="main-img-container">
+                <img id="mainImg-1" class="card-main-img" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="WAP-7">
+            </div>
+            <div class="thumbnail-gallery">
+                <img class="thumb-img active-thumb" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=200&q=80" onclick="changeImage('mainImg-1', this, 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80')">
+                <img class="thumb-img" src="https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=200&q=80" onclick="changeImage('mainImg-1', this, 'https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=600&q=80')">
+            </div>
             <div class="card-content">
                 <h3>WAP-7 3D Locomotive</h3>
                 <p>Ultra-realistic textures, custom cab view, and authentic horn sounds.</p>
                 <div class="price-row">
                     <span class="price">₹ 99/-</span>
                 </div>
+                <button class="btn-buy" onclick="selectProduct('WAP-7 3D Locomotive (₹99)')">Checkout / Buy Now</button>
             </div>
         </div>
 
-        <!-- Product 2 -->
+        <!-- Product 2: LHB Coaches -->
         <div class="card" data-category="coach" data-name="lhb coaches pack">
-            <img src="https://images.unsplash.com/photo-1532105191067-440d1667b282?auto=format&fit=crop&w=600&q=80" alt="LHB Coaches">
+            <div class="main-img-container">
+                <img id="mainImg-2" class="card-main-img" src="https://images.unsplash.com/photo-1532105191067-440d1667b282?auto=format&fit=crop&w=600&q=80" alt="LHB Coaches">
+            </div>
+            <div class="thumbnail-gallery">
+                <img class="thumb-img active-thumb" src="https://images.unsplash.com/photo-1532105191067-440d1667b282?auto=format&fit=crop&w=200&q=80" onclick="changeImage('mainImg-2', this, 'https://images.unsplash.com/photo-1532105191067-440d1667b282?auto=format&fit=crop&w=600&q=80')">
+                <img class="thumb-img" src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=200&q=80" onclick="changeImage('mainImg-2', this, 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80')">
+            </div>
             <div class="card-content">
                 <h3>LHB Coaches Pack</h3>
                 <p>Includes AC 3-Tier, Sleeper, and Generator Car with rich details.</p>
                 <div class="price-row">
                     <span class="price">₹ 149/-</span>
                 </div>
+                <button class="btn-buy" onclick="selectProduct('LHB Coaches Pack (₹149)')">Checkout / Buy Now</button>
             </div>
         </div>
+
     </div>
 
-    <!-- Order & Checkout Form -->
-    <div class="order-container">
+    <!-- Order & Checkout Form (Hidden until Buy Now is clicked) -->
+    <div class="order-container" id="checkoutSection">
         <h2>Secure Checkout</h2>
         <div class="upi-box">
             <p><b>Step 1:</b> Scan / Pay amount via UPI to: <code>apka-number@paytm</code></p>
@@ -195,6 +313,13 @@
 
         <!-- Yahan apna Formspree endpoint paste karna hai -->
         <form action="https://formspree.io/f/xoevkore" method="POST">
+            
+            <div class="form-group">
+                <label>Selected Product:</label>
+                <div class="selected-product-box" id="displayProductText">No Product Selected</div>
+                <input type="hidden" name="product" id="hiddenProductInput" required>
+            </div>
+
             <div class="form-group">
                 <label>Your Full Name:</label>
                 <input type="text" name="name" required placeholder="Enter your name">
@@ -211,15 +336,6 @@
             </div>
 
             <div class="form-group">
-                <label>Select Locomotive / Pack:</label>
-                <select name="product" required>
-                    <option value="" disabled selected>Choose your product</option>
-                    <option value="WAP-7 3D Locomotive (₹99)">WAP-7 3D Locomotive (₹99)</option>
-                    <option value="LHB Coaches Pack (₹149)">LHB Coaches Pack (₹149)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label>UPI Transaction ID (12 Digit Ref No):</label>
                 <input type="text" name="transaction_id" required placeholder="Enter UPI reference / transaction ID">
             </div>
@@ -232,8 +348,27 @@
         <p>&copy; 2026 RailX Gaming Official. All rights reserved.</p>
     </footer>
 
-    <!-- Search & Filter Script -->
+    <!-- Scripts -->
     <script>
+        function openNav() {
+            document.getElementById("sideMenu").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("sideMenu").style.width = "0";
+        }
+
+        function filterCategory(category) {
+            let cards = document.getElementsByClassName('card');
+            for (let i = 0; i < cards.length; i++) {
+                let cardCategory = cards[i].getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
         function filterProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('card');
@@ -248,21 +383,28 @@
             }
         }
 
-        function filterCategory(category, btn) {
-            let cards = document.getElementsByClassName('card');
-            let buttons = document.getElementsByClassName('filter-btn');
+        function changeImage(mainImgId, thumbElement, newSrc) {
+            let mainImage = document.getElementById(mainImgId);
+            mainImage.src = newSrc;
 
-            for (let b of buttons) { b.classList.remove('active'); }
-            btn.classList.add('active');
-
-            for (let i = 0; i < cards.length; i++) {
-                let cardCategory = cards[i].getAttribute('data-category');
-                if (category === 'all' || cardCategory === category) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
+            let cardElement = thumbElement.closest('.card');
+            let thumbnails = cardElement.getElementsByClassName('thumb-img');
+            for (let t of thumbnails) {
+                t.classList.remove('active-thumb');
             }
+            thumbElement.classList.add('active-thumb');
+        }
+
+        function selectProduct(productName) {
+            let checkoutSec = document.getElementById('checkoutSection');
+            let displayText = document.getElementById('displayProductText');
+            let hiddenInput = document.getElementById('hiddenProductInput');
+
+            displayText.innerText = productName;
+            hiddenInput.value = productName;
+
+            checkoutSec.style.display = "block";
+            checkoutSec.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 
