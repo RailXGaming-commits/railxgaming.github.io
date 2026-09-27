@@ -9,21 +9,60 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         body { background: #0b0f19; color: #fff; line-height: 1.6; }
         
-        /* Header / Hero Section */
         header {
             background: linear-gradient(rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.95)), url('https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             text-align: center;
             border-bottom: 2px solid #ff9900;
         }
-        header h1 { font-size: 38px; color: #ff9900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,153,0,0.5); }
-        header p { font-size: 16px; color: #aaa; margin-top: 10px; }
-        .channel-tag { display: inline-block; background: #ff9900; color: #0b0f19; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 15px; font-size: 14px; }
+        header h1 { font-size: 36px; color: #ff9900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,153,0,0.5); }
+        header p { font-size: 15px; color: #aaa; margin-top: 8px; }
+        .channel-tag { display: inline-block; background: #ff9900; color: #0b0f19; padding: 4px 14px; border-radius: 20px; font-weight: bold; margin-top: 12px; font-size: 13px; }
+
+        /* Controls Section (Search & Filter) */
+        .controls-container {
+            max-width: 1100px;
+            margin: 30px auto 10px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-box input {
+            width: 280px;
+            padding: 10px 15px;
+            background: #131c2e;
+            border: 1px solid #334155;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .search-box input:focus { border-color: #ff9900; outline: none; }
+        
+        .filter-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn {
+            background: #131c2e;
+            border: 1px solid #334155;
+            color: #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff9900;
+            color: #0b0f19;
+            border-color: #ff9900;
+        }
 
         /* Container */
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .container { max-width: 1100px; margin: 20px auto 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
         /* Product Card */
         .card {
@@ -34,7 +73,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: 0 10px 25px rgba(255, 153, 0, 0.2);
             border-color: #ff9900;
         }
@@ -48,14 +87,14 @@
         /* Order Section */
         .order-container {
             max-width: 600px;
-            margin: 50px auto;
+            margin: 40px auto;
             background: #131c2e;
             border: 1px solid #1e293b;
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .order-container h2 { text-align: center; color: #ff9900; margin-bottom: 20px; font-size: 26px; }
+        .order-container h2 { text-align: center; color: #ff9900; margin-bottom: 20px; font-size: 24px; }
         .upi-box {
             background: #0b0f19;
             border-left: 4px solid #ff9900;
@@ -107,10 +146,22 @@
         <div class="channel-tag">YouTube: @RailXGamingOfficial</div>
     </header>
 
+    <!-- Search & Filter Bar -->
+    <div class="controls-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search locomotives or coaches..." onkeyup="filterProducts()">
+        </div>
+        <div class="filter-btns">
+            <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
+            <button class="filter-btn" onclick="filterCategory('loco', this)">Locomotives</button>
+            <button class="filter-btn" onclick="filterCategory('coach', this)">Coaches</button>
+        </div>
+    </div>
+
     <!-- Products Showcase -->
-    <div class="container">
+    <div class="container" id="productContainer">
         <!-- Product 1 -->
-        <div class="card">
+        <div class="card" data-category="loco" data-name="wap-7 3d locomotive">
             <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="WAP-7">
             <div class="card-content">
                 <h3>WAP-7 3D Locomotive</h3>
@@ -122,7 +173,7 @@
         </div>
 
         <!-- Product 2 -->
-        <div class="card">
+        <div class="card" data-category="coach" data-name="lhb coaches pack">
             <img src="https://images.unsplash.com/photo-1532105191067-440d1667b282?auto=format&fit=crop&w=600&q=80" alt="LHB Coaches">
             <div class="card-content">
                 <h3>LHB Coaches Pack</h3>
@@ -180,6 +231,40 @@
     <footer>
         <p>&copy; 2026 RailX Gaming Official. All rights reserved.</p>
     </footer>
+
+    <!-- Search & Filter Script -->
+    <script>
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name');
+                if (name.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterCategory(category, btn) {
+            let cards = document.getElementsByClassName('card');
+            let buttons = document.getElementsByClassName('filter-btn');
+
+            for (let b of buttons) { b.classList.remove('active'); }
+            btn.classList.add('active');
+
+            for (let i = 0; i < cards.length; i++) {
+                let cardCategory = cards[i].getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
