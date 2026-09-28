@@ -37,7 +37,7 @@
         
         <!-- Right Side: YouTube Button & Store Button -->
         <div class="flex items-center space-x-3">
-            <a href="https://www.youtube.com/@RailXGamingOfficial" target="_blank" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/30 px-3 py-1.5 rounded-lg text-sm font-semibold transition flex items-center space-x-1.5">
+            <a href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/30 px-3 py-1.5 rounded-lg text-sm font-semibold transition flex items-center space-x-1.5">
                 <i class="fab fa-youtube text-base"></i>
                 <span class="hidden sm:inline">YouTube</span>
             </a>
@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        <!-- Product Grid (Cards with Prices Visible) -->
+        <!-- Product Grid with Watermarked Images -->
         <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Dynamically populated via JS -->
         </div>
@@ -130,8 +130,14 @@
             <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-800/80 p-2 rounded-full z-10">
                 <i class="fas fa-times"></i>
             </button>
-            <div id="modal-image-container" class="w-full h-64 bg-neutral-950 overflow-hidden">
+            <div id="modal-image-container" class="w-full h-64 bg-neutral-950 overflow-hidden relative">
                 <img id="modal-img" src="" alt="Asset" class="w-full h-full object-cover">
+                <!-- Watermark on Modal Image -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
+                    <span class="text-white font-black text-2xl tracking-widest uppercase bg-black/40 px-4 py-1.5 rounded-lg border border-white/20 transform -rotate-12">
+                        RAILX GAMING
+                    </span>
+                </div>
             </div>
             <div class="p-6">
                 <div class="flex justify-between items-center">
@@ -251,10 +257,16 @@
                 card.innerHTML = `
                     <div class="h-52 w-full overflow-hidden relative bg-neutral-950">
                         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-orange-400 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-neutral-800">
+                        <!-- Watermark Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
+                            <span class="text-white font-black text-lg tracking-widest uppercase bg-black/40 px-3 py-1 rounded-md border border-white/25 transform -rotate-12">
+                                RAILX GAMING
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-orange-400 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-neutral-800 z-10">
                             ${product.category.toUpperCase()}
                         </span>
-                        <span class="absolute bottom-3 right-3 bg-orange-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-md shadow-md">
+                        <span class="absolute bottom-3 right-3 bg-orange-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-md shadow-md z-10">
                             ${product.price}
                         </span>
                     </div>
