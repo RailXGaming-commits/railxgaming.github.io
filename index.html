@@ -1,724 +1,343 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RailX Gaming - 3D Locos & Coaches Store</title>
+    <title>RailX Gaming - 3D Asset Store</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        railx: {
-                            dark: '#05070c',
-                            card: '#0f172a',
-                            accent: '#f97316',
-                            blue: '#3b82f6'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        gaming: ['Orbitron', 'Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #05070c;
-            color: #f8fafc;
-            overflow-x: hidden;
+        /* Custom Honeycomb Pattern Background for Home Screen */
+        .main-screen {
+            background-color: #0f0f0f;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath fill-rule='evenodd' d='M13.99 9.83l13.5-7.78v15.56l-13.5 7.78-13.5-7.78V2.05l13.5 7.78zM3 12.37v13.56l11.5 6.64 11.5-6.64V12.37L14.5 5.73 3 12.37zM0 27.64l13.5 7.78v15.56L0 43.2V27.64zm3 2.54v11.56l11.5 6.64 11.5-6.64V30.18L14.5 23.54 3 30.18z'/%3E%3C/g%3E%3C/svg%3E");
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #05070c;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
-        .gallery-card {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-        }
-        .gallery-card:hover {
-            transform: translateY(-8px);
+        /* Smooth Sidebar Transition */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#05070c] text-slate-100 selection:bg-orange-500 selection:text-white">
+<body class="bg-neutral-950 text-white font-sans antialiased overflow-x-hidden">
 
-    <header class="fixed top-0 left-0 right-0 z-40 bg-[#05070c]/80 backdrop-blur-md border-b border-slate-900 px-6 py-4 flex items-center justify-between">
-        <!-- Hamburger Menu Button -->
-        <button id="menu-btn" aria-label="Open Navigation Menu" class="p-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 transition-all duration-200 focus:outline-none flex items-center gap-2.5 shadow-lg shadow-black/20">
-            <i class="fa-solid fa-bars text-base text-orange-400"></i>
-            <span class="text-xs font-semibold tracking-wider uppercase hidden sm:inline text-slate-300">Menu</span>
-        </button>
-
-        <!-- Brand Logo -->
-        <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/30">
-                <i class="fa-solid fa-train text-white text-base"></i>
-            </div>
-            <div>
-                <h1 class="font-extrabold text-base tracking-wide bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">RailX Gaming</h1>
-                <p class="text-[10px] text-orange-400 font-bold tracking-widest uppercase">3D Asset Store</p>
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full bg-neutral-900/90 backdrop-blur-md border-b border-neutral-800 z-40 flex items-center justify-between px-4 py-3">
+        <div class="flex items-center space-x-3">
+            <button id="menu-btn" class="text-neutral-300 hover:text-white text-xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Logo & Brand Name (Aap yahan <img> tag bhi laga sakte hain) -->
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="showHome()">
+                <i class="fas fa-train text-orange-500 text-2xl"></i>
+                <span class="font-extrabold text-lg tracking-wider bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">RailX Gaming</span>
             </div>
         </div>
-
-        <!-- YouTube Channel Badge -->
-        <a href="https://www.youtube.com/@RailXGamingOfficial" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-semibold flex items-center gap-2 transition-all shadow-lg shadow-black/20">
-            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
-            <span class="hidden md:inline">YouTube Channel</span>
-        </a>
-    </header>
-
-    <div id="drawer-overlay" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
-
-    <div id="side-drawer" class="fixed top-0 left-0 bottom-0 z-50 w-80 bg-[#090e1a] border-r border-slate-800 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
-        <!-- Drawer Header -->
-        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
-                    <i class="fa-solid fa-compass"></i>
-                </div>
-                <span class="font-bold text-slate-200 tracking-wide">Explore Store</span>
-            </div>
-            <button id="close-drawer" aria-label="Close Menu" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
-                <i class="fa-solid fa-xmark text-lg"></i>
+        <div>
+            <button onclick="openSection('store-section')" class="bg-orange-600 hover:bg-orange-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition shadow-lg shadow-orange-600/20">
+                Store
             </button>
         </div>
+    </header>
 
-        <!-- Drawer Body Content -->
-        <div class="p-6 flex-1 overflow-y-auto space-y-6">
-            <!-- Search Bar -->
-            <div>
-                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Search 3D Models</label>
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
-                    <input type="text" id="drawer-search-input" placeholder="Search WAP7, LHB, Vande Bharat..." class="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors">
-                </div>
-            </div>
-
-            <hr class="border-slate-800/80">
-
-            <!-- Category Links -->
-            <div class="space-y-2">
-                <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Categories</span>
-                
-                <button onclick="goHome(); toggleDrawer();" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-all group border border-slate-800/50">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-house"></i>
-                        </div>
-                        <span class="font-medium text-sm">Home Screen</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
-                </button>
-
-                <button onclick="openGallery('all'); toggleDrawer();" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-all group border border-slate-800/50">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-border-all"></i>
-                        </div>
-                        <span class="font-medium text-sm">All 3D Models</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
-                </button>
-
-                <button onclick="openGallery('loco'); toggleDrawer();" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-all group border border-slate-800/50">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-train"></i>
-                        </div>
-                        <span class="font-medium text-sm">Locomotives Section</span>
-                    </div>
-                    <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full font-bold">Locos</span>
-                </button>
-
-                <button onclick="openGallery('coach'); toggleDrawer();" class="w-full flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-200 transition-all group border border-slate-800/50">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-train-subway"></i>
-                        </div>
-                        <span class="font-medium text-sm">Coaches Section</span>
-                    </div>
-                    <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold">Coaches</span>
-                </button>
-            </div>
-
-            <hr class="border-slate-800/80">
-
-            <!-- Creator Info -->
-            <div class="p-4 rounded-2xl bg-gradient-to-br from-slate-950 to-slate-900 border border-slate-800/80 shadow-lg">
-                <div class="flex items-center gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-xs">RX</div>
-                    <div>
-                        <h4 class="text-xs font-bold text-white">RailX Gaming</h4>
-                        <p class="text-[10px] text-slate-400">MSTS & OpenRails 3D Creator</p>
-                    </div>
-                </div>
-                <p class="text-[11px] text-slate-400 leading-relaxed">High fidelity 3D locomotives and coaches for ultimate Indian Railways simulation.</p>
-            </div>
+    <!-- Sliding Sidebar Menu -->
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-72 bg-neutral-900 border-r border-neutral-800 z-50 transform -translate-x-full flex flex-col shadow-2xl">
+        <div class="flex items-center justify-between p-4 border-b border-neutral-800">
+            <span class="font-bold text-orange-500 tracking-wide">NAVIGATION</span>
+            <button id="close-btn" class="text-neutral-400 hover:text-white text-lg">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-
-        <div class="p-4 border-t border-slate-800 text-center text-[11px] text-slate-500">
+        <div class="p-4 flex-1 overflow-y-auto space-y-2">
+            <a href="#" onclick="showHome(); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fas fa-home w-5 text-orange-500"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" onclick="openSection('store-section', 'all'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fas fa-store w-5 text-orange-500"></i>
+                <span>All Assets</span>
+            </a>
+            <a href="#" onclick="openSection('store-section', 'loco'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fas fa-subway w-5 text-orange-500"></i>
+                <span>Locomotives</span>
+            </a>
+            <a href="#" onclick="openSection('store-section', 'coach'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fas fa-train-subway w-5 text-orange-500"></i>
+                <span>Coaches</span>
+            </a>
+        </div>
+        <div class="p-4 border-t border-neutral-800 text-xs text-neutral-500 text-center">
             &copy; 2026 RailX Gaming. All rights reserved.
         </div>
     </div>
 
-    <main class="flex-1 flex flex-col justify-center items-center w-full relative">
-        
-        <!-- HOME SCREEN: Clean minimal view with massive epic gaming title -->
-        <div id="home-view" class="min-h-[85vh] w-full flex flex-col items-center justify-center px-4 text-center">
-            <div class="space-y-6 max-w-4xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest animate-pulse">
-                    <i class="fa-solid fa-gamepad"></i> Official 3D Asset Store
-                </div>
-                <h2 class="font-gaming font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight uppercase bg-gradient-to-br from-white via-slate-100 to-orange-500 bg-clip-text text-transparent drop-shadow-2xl">
-                    WELCOME TO RAILX GAMING
-                </h2>
-                <p class="text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
-                    Explore high fidelity custom locomotives and coaches for MSTS & OpenRails. Open the side menu to browse our complete collection.
-                </p>
-                <div class="pt-6">
-                    <button onclick="openGallery('all')" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-sm tracking-wider uppercase shadow-2xl shadow-orange-500/30 transition-all transform hover:scale-105 flex items-center gap-3 mx-auto">
-                        <i class="fa-solid fa-compass text-base"></i>
-                        <span>Explore 3D Models</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+    <!-- Backdrop for Sidebar -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden backdrop-blur-sm"></div>
 
-        <!-- GALLERY VIEW (Hidden by default until side menu category is clicked) -->
-        <div id="gallery-view" class="hidden max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-            
-            <div class="mb-10 text-center sm:text-left flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-slate-900 pb-8">
-                <div>
-                    <button onclick="goHome()" class="inline-flex items-center gap-2 text-xs font-semibold text-orange-400 hover:text-orange-300 mb-3 transition-colors">
-                        <i class="fa-solid fa-arrow-left"></i> Back to Home Screen
-                    </button>
-                    <h2 id="gallery-title" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Indian Railways 3D Assets</h2>
-                    <p id="gallery-subtitle" class="text-sm text-slate-400 mt-2 max-w-xl">Clean minimalist gallery. Click any photo to inspect details and purchase securely via UPI.</p>
-                </div>
-
-                <!-- Filter Tabs -->
-                <div class="flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 self-start sm:self-auto shadow-lg">
-                    <button onclick="openGallery('all')" id="tab-all" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-orange-500 text-white transition-all shadow-md">All Photos</button>
-                    <button onclick="openGallery('loco')" id="tab-loco" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Locos</button>
-                    <button onclick="openGallery('coach')" id="tab-coach" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Coaches</button>
-                </div>
-            </div>
-
-            <!-- Photo Grid Container (NO PRICES ON MAIN CARDS) -->
-            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamic Cards Injected via JS -->
-            </div>
-
-            <!-- Empty State -->
-            <div id="empty-state" class="hidden flex-col items-center justify-center py-24 text-center">
-                <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 mb-4 text-2xl">
-                    <i class="fa-solid fa-train-tunnel"></i>
-                </div>
-                <h3 class="text-lg font-bold text-slate-200">No models found</h3>
-                <p class="text-sm text-slate-400 mt-1">Try searching with a different keyword or reset filters.</p>
-                <button onclick="openGallery('all')" class="mt-4 px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold transition-colors">Reset Filter</button>
-            </div>
-        </div>
+    <!-- MAIN SCREEN (Epic Welcome Banner with Honeycomb Texture) -->
+    <main id="home-screen" class="main-screen h-screen flex flex-col items-center justify-center text-center px-4 pt-16">
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-wider bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent drop-shadow-2xl">
+            Welcome To RailX Gaming
+        </h1>
+        <p class="mt-4 text-neutral-400 text-sm sm:text-base max-w-md">
+            High-quality custom 3D Locomotives & Coaches for MSTS and OpenRails.
+        </p>
+        <button onclick="openSection('store-section')" class="mt-8 bg-orange-600 hover:bg-orange-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg shadow-orange-600/30 transition transform hover:-translate-y-0.5">
+            Explore 3D Assets <i class="fas fa-arrow-right ml-2"></i>
+        </button>
     </main>
 
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div id="modal-content" class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300">
-            <!-- Modal Header Image -->
-            <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-950">
-                <img id="modal-img" src="" alt="Locomotive Model" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-black/30"></div>
-                <button onclick="closeProductModal()" aria-label="Close Modal" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center backdrop-blur-md transition-colors">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-                <span id="modal-category-badge" class="absolute bottom-4 left-6 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-orange-500 text-white shadow-lg">Locomotive</span>
+    <!-- STORE SECTION (Hidden by default, shown when Store is clicked) -->
+    <section id="store-section" class="hidden min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-neutral-800 pb-4">
+            <h2 class="text-2xl font-bold tracking-tight text-white flex items-center">
+                <i class="fas fa-cube text-orange-500 mr-2"></i> 3D Asset Store
+            </h2>
+            <!-- Search & Filters -->
+            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <div class="relative flex-1 md:w-64">
+                    <i class="fas fa-search absolute left-3 top-3.5 text-neutral-500 text-sm"></i>
+                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Search locomotives, coaches..." class="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="filterCategory('all')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition active-cat">All</button>
+                    <button onclick="filterCategory('loco')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Locos</button>
+                    <button onclick="filterCategory('coach')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Coaches</button>
+                </div>
             </div>
+        </div>
 
-            <!-- Modal Body Details -->
-            <div class="p-6 sm:p-8 space-y-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <h3 id="modal-title" class="text-2xl font-bold text-white">Locomotive Name</h3>
-                        <p id="modal-subtitle" class="text-xs text-slate-400 mt-1">Indian Railways Simulation Asset</p>
-                    </div>
-                    <div class="text-left sm:text-right">
-                        <span class="text-xs text-slate-400 block font-medium">Model Price</span>
-                        <span id="modal-price" class="text-2xl font-extrabold text-orange-400">₹499</span>
-                    </div>
-                </div>
+        <!-- Product Grid (Clean photos with no prices) -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated via JS -->
+        </div>
+    </section>
 
-                <p id="modal-desc" class="text-sm text-slate-300 leading-relaxed">
-                    Ultra-detailed 3D model optimized for MSTS and OpenRails.
-                </p>
-
-                <!-- Specs Grid -->
-                <div class="grid grid-cols-3 gap-3 pt-2">
-                    <div class="bg-slate-950/80 border border-slate-800/80 p-3 rounded-2xl text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-500 block">Format</span>
-                        <span id="modal-format" class="text-xs font-semibold text-slate-200 mt-0.5 block">.s / .ace</span>
-                    </div>
-                    <div class="bg-slate-950/80 border border-slate-800/80 p-3 rounded-2xl text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-500 block">Poly Count</span>
-                        <span id="modal-polys" class="text-xs font-semibold text-slate-200 mt-0.5 block">45,000</span>
-                    </div>
-                    <div class="bg-slate-950/80 border border-slate-800/80 p-3 rounded-2xl text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-500 block">Simulator</span>
-                        <span id="modal-sim" class="text-xs font-semibold text-slate-200 mt-0.5 block">MSTS / OR</span>
-                    </div>
-                </div>
-
-                <!-- Buy Action Button -->
-                <div class="pt-4 border-t border-slate-800/80">
-                    <button onclick="openCheckoutModal()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-sm shadow-xl shadow-orange-500/25 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span>Buy Now via UPI & Formspree</span>
-                    </button>
+    <!-- Product Details Modal -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-800/80 p-2 rounded-full z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-image-container" class="w-full h-64 bg-neutral-950 overflow-hidden">
+                <img id="modal-img" src="" alt="Asset" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6">
+                <span id="modal-cat" class="text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-md">Loco</span>
+                <h3 id="modal-title" class="text-xl font-bold text-white mt-2">Product Name</h3>
+                <p id="modal-desc" class="text-neutral-400 text-sm mt-3 leading-relaxed">Detailed description of the 3D model goes here...</p>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button onclick="closeDetailModal()" class="px-4 py-2 rounded-xl bg-neutral-800 text-neutral-300 text-sm font-semibold hover:bg-neutral-700 transition">Close</button>
+                    <button onclick="openCheckoutModal()" class="px-6 py-2 rounded-xl bg-orange-600 text-white text-sm font-semibold hover:bg-orange-500 transition shadow-lg shadow-orange-600/30">Buy Now</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- UPI Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
-            <!-- Modal Header -->
-            <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-950">
-                <div>
-                    <h3 class="text-lg font-bold text-white">Checkout & Payment</h3>
-                    <p class="text-xs text-slate-400 mt-0.5">Pay via UPI & submit transaction ID for delivery</p>
-                </div>
-                <button onclick="closeCheckoutModal()" aria-label="Close Checkout" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Modal Form Content -->
-            <div class="p-6 overflow-y-auto space-y-6">
-                <!-- Item Summary -->
-                <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 flex items-center gap-4">
-                    <img id="checkout-item-img" src="" alt="" class="w-16 h-16 rounded-xl object-cover">
-                    <div>
-                        <span id="checkout-item-cat" class="text-[10px] font-bold text-orange-400 uppercase tracking-wider">Locomotive</span>
-                        <h4 id="checkout-item-title" class="text-sm font-bold text-white">WAP-7 Electric Loco</h4>
-                        <span id="checkout-item-price" class="text-xs font-extrabold text-orange-400">₹499</span>
+    <!-- Checkout Modal (Formspree + UPI) -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-800/80 p-2 rounded-full z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="p-6">
+                <h3 class="text-lg font-bold text-white mb-2">Secure UPI Checkout</h3>
+                <p class="text-xs text-neutral-400 mb-4">Scan the QR or pay via UPI ID, then submit your transaction details below.</p>
+                
+                <!-- UPI Details Box -->
+                <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-xl text-center mb-6">
+                    <div class="bg-white p-2 inline-block rounded-lg mb-2">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=yourupi@oksbi&pn=RailXGaming" alt="UPI QR" class="w-32 h-32 mx-auto">
                     </div>
+                    <p class="text-xs text-neutral-400">UPI ID:</p>
+                    <p class="font-mono font-bold text-orange-400 text-sm select-all">yourupi@oksbi</p>
                 </div>
 
-                <!-- UPI QR & ID -->
-                <div class="p-4 rounded-2xl bg-gradient-to-br from-orange-950/30 to-slate-950 border border-orange-500/30 text-center space-y-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-orange-400 block">Step 1: Scan & Pay via any UPI App</span>
-                    <div class="w-36 h-36 bg-white p-2 rounded-xl mx-auto shadow-md flex items-center justify-center">
-                        <img src="https://placehold.co/140x140/0f172a/ffffff?text=Scan+UPI+QR" alt="UPI QR Code" class="w-full h-full rounded object-cover">
+                <!-- Formspree Form (Apna Formspree URL yahan dalein) -->
+                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
+                    <input type="hidden" id="checkout-product-name" name="Product_Name" value="">
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Your Name</label>
+                        <input type="text" name="Name" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
                     </div>
                     <div>
-                        <span class="text-[11px] text-slate-400 block">Or Pay directly to UPI ID:</span>
-                        <div class="inline-flex items-center gap-2 mt-1 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-orange-300 font-mono text-xs font-bold select-all">
-                            <span id="upi-id-text">railxgaming@oksbi</span>
-                            <button onclick="copyUpiId()" class="text-slate-400 hover:text-white" title="Copy UPI ID"><i class="fa-regular fa-copy"></i></button>
-                        </div>
+                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Phone Number</label>
+                        <input type="tel" name="Phone" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
                     </div>
-                </div>
-
-                <!-- Formspree Form -->
-                <form id="order-form" action="https://formspree.io/f/mlezzbby" method="POST" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                    <input type="hidden" name="model_selected" id="form-model-input" value="">
-                    <input type="hidden" name="model_price" id="form-price-input" value="">
-
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block pt-1">Step 2: Enter Your Details & Transaction ID</span>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Your Full Name</label>
-                            <input type="text" name="name" required placeholder="Rahul Kumar" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-orange-500">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Phone Number / WhatsApp</label>
-                            <input type="tel" name="phone" required placeholder="9876543210" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-orange-500">
-                        </div>
-                    </div>
-
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Email Address (For file delivery)</label>
-                        <input type="email" name="email" required placeholder="rahul@gmail.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-orange-500">
+                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Email Address (For file delivery)</label>
+                        <input type="email" name="Email" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
                     </div>
-
                     <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">UPI Transaction ID / UTR Number</label>
-                        <input type="text" name="transaction_id" required placeholder="UTR / Ref No. (e.g. 4352xxxxxxxx)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-orange-500 font-mono">
+                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Transaction ID / UTR Number</label>
+                        <input type="text" name="Transaction_ID" required placeholder="Enter UPI reference / Txn ID" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
                     </div>
-
-                    <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Submit Payment & Order Details</span>
+                    <button type="submit" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-lg shadow-orange-600/30">
+                        Submit Payment Details
                     </button>
                 </form>
-
-                <!-- Success Box -->
-                <div id="success-box" class="hidden p-5 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <h4 class="text-base font-bold text-white">Payment Details Submitted Successfully!</h4>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Once verified by RailX Gaming, your 3D model file (.s / .ace) will be sent directly to your email address. Thank you for supporting the channel!
-                    </p>
-                    <button onclick="closeCheckoutModal()" class="px-6 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors">Close Window</button>
-                </div>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript Logic -->
     <script>
-        // 3D Locos and Coaches Dataset
+        // PRODUCTS LIST (Yahan aap apne products ka naam aur details change kar sakte hain)
         const products = [
             {
                 id: 1,
-                title: "WAP-7 'Hamtaro' 30250",
-                subtitle: "Indian Railways Electric Locomotive",
+                name: "WAP-7 Electric Locomotive",
                 category: "loco",
-                price: "₹499",
-                format: ".s / .ace",
-                polys: "48,200",
-                sim: "MSTS & OpenRails",
-                desc: "Equipped with high resolution WAP7 textures, custom cab view, working speedometer dials, and authentic WAP7 traction motor whine audio setup.",
-                image: "https://images.unsplash.com/photo-1515165562839-978bbcf10277?auto=format&fit=crop&w=800&q=80"
+                image: "https://images.unsplash.com/photo-1515165562839-978bbcfc894e?auto=format&fit=crop&w=800&q=80",
+                description: "High-detail 3D model of Indian Railways WAP-7 locomotive with realistic cab textures and animations."
             },
             {
                 id: 2,
-                title: "WAG-9H Heavy Hauler",
-                subtitle: "Freight Electric Locomotive",
-                category: "loco",
-                price: "₹549",
-                format: ".s / .ace",
-                polys: "52,000",
-                sim: "MSTS & OpenRails",
-                desc: "The beast of Indian freight corridors. Features detailed bogies, weathered texture variants, pantograph animation triggers, and dual cab support.",
-                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80"
+                name: "LHB AC First Class Coach",
+                category: "coach",
+                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
+                description: "Official LHB ICF/RCF coach 3D model optimized for MSTS and OpenRails with rich interiors."
             },
             {
                 id: 3,
-                title: "Vande Bharat Express Trainset",
-                subtitle: "Self-Propelled Semi-High Speed Train",
-                category: "coach",
-                price: "₹799",
-                format: ".s / .ace (Full Rake)",
-                polys: "89,000",
-                sim: "MSTS & OpenRails",
-                desc: "Complete 16-car Vande Bharat rake with aerodynamic driver cabin, automatic doors simulation textures, and pristine interior seating views.",
-                image: "https://images.unsplash.com/photo-1532105191-04e6d44d4715?auto=format&fit=crop&w=800&q=80"
+                name: "WAG-9 Heavy Hauler",
+                category: "loco",
+                image: "https://images.unsplash.com/photo-1515165562839-978bbcfc894e?auto=format&fit=crop&w=800&q=80",
+                description: "Powerful freight electric locomotive model designed for heavy goods train routes in MSTS."
             },
             {
                 id: 4,
-                title: "LHB Rajdhani AC First Class (1AC)",
-                subtitle: "Linke Hofmann Busch Passenger Coach",
+                name: "ICF General Sleeper Coach",
                 category: "coach",
-                price: "₹299",
-                format: ".s / .ace",
-                polys: "24,000",
-                sim: "MSTS & OpenRails",
-                desc: "Red-and-silver LHB 1AC coach equipped with CBC couplers, realistic wheel bogie suspension motion, and night lighting textures.",
-                image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                id: 5,
-                title: "WDM-3D 'Alco' Diesel Loco",
-                subtitle: "Legendary EMD/Alco Locomotive",
-                category: "loco",
-                price: "₹449",
-                format: ".s / .ace",
-                polys: "41,000",
-                sim: "MSTS & OpenRails",
-                desc: "Famous blue-white Alco roarer with distinctive hood styling, exhaust smoke effects configuration, and authentic Alco horn sound pack.",
-                image: "https://images.unsplash.com/photo-1517736996303-4eec4a66bb17?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                id: 6,
-                title: "ICF Shatabdi Express Chair Car",
-                subtitle: "Integral Coach Factory AC Executive",
-                category: "coach",
-                price: "₹249",
-                format: ".s / .ace",
-                polys: "19,500",
-                sim: "MSTS & OpenRails",
-                desc: "Classic blue-grey ICF Shatabdi chair car with classic window bars, detailed interior passenger layout, and realistic sound dampening profile.",
-                image: "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?auto=format&fit=crop&w=800&q=80"
+                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
+                description: "Classic Indian Railways ICF sleeper coach with authentic exterior detailing and weathering."
             }
         ];
 
-        let currentSelectedItem = products[0];
-        let currentFilter = 'all';
+        let activeCategory = 'all';
+        let currentSelectedProduct = null;
 
-        // DOM Element references
-        const menuBtn = document.getElementById('menu-btn');
-        const sideDrawer = document.getElementById('side-drawer');
-        const drawerOverlay = document.getElementById('drawer-overlay');
-        const closeDrawerBtn = document.getElementById('close-drawer');
-        const homeView = document.getElementById('home-view');
-        const galleryView = document.getElementById('gallery-view');
-        const galleryGrid = document.getElementById('gallery-grid');
-        const emptyState = document.getElementById('empty-state');
-        const drawerSearchInput = document.getElementById('drawer-search-input');
-        
-        const productModal = document.getElementById('product-modal');
-        const modalContent = document.getElementById('modal-content');
-        const checkoutModal = document.getElementById('checkout-modal');
+        // Render Products on Store Screen
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
 
-        // Navigation toggles
-        function toggleDrawer() {
-            const isOpen = sideDrawer.classList.contains('translate-x-0');
-            if (isOpen) {
-                sideDrawer.classList.remove('translate-x-0');
-                sideDrawer.classList.add('-translate-x-full');
-                drawerOverlay.classList.remove('opacity-100', 'pointer-events-auto');
-                drawerOverlay.classList.add('opacity-0', 'pointer-events-none');
-            } else {
-                sideDrawer.classList.remove('-translate-x-full');
-                sideDrawer.classList.add('translate-x-0');
-                drawerOverlay.classList.remove('opacity-0', 'pointer-events-auto');
-                drawerOverlay.classList.add('opacity-100', 'pointer-events-auto');
-            }
-        }
-
-        menuBtn.addEventListener('click', toggleDrawer);
-        closeDrawerBtn.addEventListener('click', toggleDrawer);
-        drawerOverlay.addEventListener('click', toggleDrawer);
-
-        function goHome() {
-            homeView.classList.remove('hidden');
-            homeView.classList.add('flex');
-            galleryView.classList.add('hidden');
-            galleryView.classList.remove('flex');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function openGallery(category) {
-            homeView.classList.remove('flex');
-            homeView.classList.add('hidden');
-            galleryView.classList.remove('hidden');
-            galleryView.classList.add('flex');
-            filterGallery(category);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Render Clean Gallery Cards (No price on cards)
-        function renderGallery(items) {
-            galleryGrid.innerHTML = '';
             if (items.length === 0) {
-                emptyState.classList.remove('hidden');
-                emptyState.classList.add('flex');
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-neutral-500">No assets found matching your search.</div>`;
                 return;
             }
-            emptyState.classList.remove('flex');
-            emptyState.classList.add('hidden');
 
-            items.forEach(item => {
+            items.forEach(product => {
                 const card = document.createElement('div');
-                card.className = "gallery-card group relative bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden cursor-pointer shadow-xl flex flex-col";
-                card.onclick = () => openProductModal(item.id);
-                
+                card.className = 'bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-xl hover:border-orange-500/50 transition duration-300 flex flex-col group cursor-pointer';
+                card.onclick = () => openDetailModal(product.id);
+
                 card.innerHTML = `
-                    <div class="relative h-72 sm:h-80 w-full overflow-hidden bg-slate-950">
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80 group-hover:opacity-50 transition-opacity"></div>
-                        <span class="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full ${item.category === 'loco' ? 'bg-orange-500/90 text-white' : 'bg-emerald-500/90 text-white'} backdrop-blur-md shadow-md">
-                            ${item.category === 'loco' ? 'Locomotive' : 'Coach'}
+                    <div class="h-52 w-full overflow-hidden relative bg-neutral-950">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-orange-400 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-neutral-800">
+                            ${product.category.toUpperCase()}
                         </span>
-                        <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700/60 flex items-center justify-center text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                        </div>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between bg-slate-900">
-                        <div>
-                            <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">${item.subtitle}</p>
-                            <h3 class="text-lg font-bold text-white mt-1 group-hover:text-orange-400 transition-colors">${item.title}</h3>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                            <span>Click to view details</span>
-                            <span class="font-bold text-orange-400 group-hover:translate-x-1 transition-transform">Inspect <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i></span>
+                    <div class="p-5 flex flex-col flex-1 justify-between">
+                        <h3 class="font-bold text-white text-lg group-hover:text-orange-400 transition">${product.name}</h3>
+                        <div class="mt-4 flex items-center justify-between text-xs text-neutral-400 font-semibold">
+                            <span class="text-orange-500 flex items-center"><i class="fas fa-eye mr-1"></i> View Asset</span>
+                            <span>MSTS / OpenRails</span>
                         </div>
                     </div>
                 `;
-                galleryGrid.appendChild(card);
+                grid.appendChild(card);
             });
         }
 
-        // Filter Gallery Categories
-        function filterGallery(category) {
-            currentFilter = category;
-            
-            ['all', 'loco', 'coach'].forEach(cat => {
-                const btn = document.getElementById(`tab-${cat}`);
-                if (btn) {
-                    if (cat === category) {
-                        btn.className = "px-3.5 py-2 rounded-lg text-xs font-semibold bg-orange-500 text-white transition-all shadow-md";
-                    } else {
-                        btn.className = "px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all";
-                    }
-                }
+        // Navigation Helpers
+        function showHome() {
+            document.getElementById('home-screen').classList.remove('hidden');
+            document.getElementById('store-section').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openSection(sectionId, category = 'all') {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('store-section').classList.remove('hidden');
+            filterCategory(category);
+            window.scrollTo(0, 0);
+        }
+
+        // Sidebar Controls
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebar-backdrop');
+        
+        document.getElementById('menu-btn').onclick = () => {
+            sidebar.classList.remove('-translate-x-full');
+            backdrop.classList.remove('hidden');
+        };
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            backdrop.classList.add('hidden');
+        }
+
+        document.getElementById('close-btn').onclick = closeSidebar;
+        backdrop.onclick = closeSidebar;
+
+        // Filtering & Search
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-orange-600', 'text-white');
+                btn.classList.add('bg-neutral-800', 'text-neutral-300');
             });
-
-            const titleEl = document.getElementById('gallery-title');
-            const subTitleEl = document.getElementById('gallery-subtitle');
-            if (category === 'loco') {
-                titleEl.innerText = "Locomotives Section";
-                subTitleEl.innerText = "High-powered electric and diesel locomotives for MSTS and OpenRails.";
-            } else if (category === 'coach') {
-                titleEl.innerText = "Coaches Section";
-                subTitleEl.innerText = "LHB, ICF, and Vande Bharat passenger coaches with realistic bogie physics.";
-            } else {
-                titleEl.innerText = "Indian Railways 3D Assets";
-                subTitleEl.innerText = "Clean minimalist gallery. Click any photo to inspect details and purchase securely via UPI.";
-            }
-
-            if (category === 'all') {
-                renderGallery(products);
-            } else {
-                const filtered = products.filter(p => p.category === category);
-                renderGallery(filtered);
-            }
+            event && event.target && event.target.classList.add('bg-orange-600', 'text-white');
+            applyFilters();
         }
 
-        // Search Drawer functionality
-        drawerSearchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (!query) {
-                openGallery(currentFilter);
-                return;
-            }
-            openGallery(currentFilter);
-            const filtered = products.filter(p => 
-                p.title.toLowerCase().includes(query) || 
-                p.subtitle.toLowerCase().includes(query) ||
-                p.desc.toLowerCase().includes(query)
-            );
-            renderGallery(filtered);
-        });
-
-        // Product Details Modal
-        function openProductModal(id) {
-            const item = products.find(p => p.id === id);
-            if (!item) return;
-            currentSelectedItem = item;
-
-            document.getElementById('modal-img').src = item.image;
-            document.getElementById('modal-title').innerText = item.title;
-            document.getElementById('modal-subtitle').innerText = item.subtitle;
-            document.getElementById('modal-price').innerText = item.price;
-            document.getElementById('modal-desc').innerText = item.desc;
-            document.getElementById('modal-format').innerText = item.format;
-            document.getElementById('modal-polys').innerText = item.polys;
-            document.getElementById('modal-sim').innerText = item.sim;
-            
-            const badge = document.getElementById('modal-category-badge');
-            badge.innerText = item.category === 'loco' ? 'Locomotive' : 'Coach';
-            badge.className = `absolute bottom-4 left-6 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full ${item.category === 'loco' ? 'bg-orange-500 text-white' : 'bg-emerald-500 text-white'} shadow-lg`;
-
-            productModal.classList.remove('opacity-0', 'pointer-events-none');
-            productModal.classList.add('opacity-100', 'pointer-events-auto');
-            modalContent.classList.remove('scale-95');
-            modalContent.classList.add('scale-100');
+        function filterProducts() {
+            applyFilters();
         }
 
-        function closeProductModal() {
-            productModal.classList.remove('opacity-100', 'pointer-events-auto');
-            productModal.classList.add('opacity-0', 'pointer-events-none');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
+        function applyFilters() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = products.filter(p => {
+                const matchesCategory = (activeCategory === 'all' || p.category === activeCategory);
+                const matchesQuery = p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
+                return matchesCategory && matchesQuery;
+            });
+            renderProducts(filtered);
         }
 
-        productModal.addEventListener('click', (e) => {
-            if (e.target === productModal) closeProductModal();
-        });
+        // Modal Controls
+        function openDetailModal(productId) {
+            currentSelectedProduct = products.find(p => p.id === productId);
+            if (!currentSelectedProduct) return;
 
-        // Checkout Modal Functions
+            document.getElementById('modal-img').src = currentSelectedProduct.image;
+            document.getElementById('modal-title').innerText = currentSelectedProduct.name;
+            document.getElementById('modal-cat').innerText = currentSelectedProduct.category.toUpperCase();
+            document.getElementById('modal-desc').innerText = currentSelectedProduct.description;
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
         function openCheckoutModal() {
-            closeProductModal();
-            
-            document.getElementById('checkout-item-img').src = currentSelectedItem.image;
-            document.getElementById('checkout-item-title').innerText = currentSelectedItem.title;
-            document.getElementById('checkout-item-price').innerText = currentSelectedItem.price;
-            document.getElementById('checkout-item-cat').innerText = currentSelectedItem.category === 'loco' ? 'Locomotive' : 'Coach';
-
-            document.getElementById('form-model-input').value = currentSelectedItem.title;
-            document.getElementById('form-price-input').value = currentSelectedItem.price;
-
-            document.getElementById('order-form').style.display = 'block';
-            document.getElementById('success-box').classList.add('hidden');
-
-            checkoutModal.classList.remove('opacity-0', 'pointer-events-none');
-            checkoutModal.classList.add('opacity-100', 'pointer-events-auto');
+            if (!currentSelectedProduct) return;
+            closeDetailModal();
+            document.getElementById('checkout-product-name').value = currentSelectedProduct.name;
+            document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
         function closeCheckoutModal() {
-            checkoutModal.classList.remove('opacity-100', 'pointer-events-auto');
-            checkoutModal.classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('checkout-modal').classList.add('hidden');
         }
 
-        checkoutModal.addEventListener('click', (e) => {
-            if (e.target === checkoutModal) closeCheckoutModal();
-        });
-
-        // Copy UPI ID helper
-        function copyUpiId() {
-            const upiText = document.getElementById('upi-id-text').innerText;
-            const tempInput = document.createElement('textarea');
-            tempInput.value = upiText;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert('UPI ID copied to clipboard: ' + upiText);
-        }
-
-        // Formspree Submission AJAX Handler
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const submitBtn = document.getElementById('submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Submitting order...`;
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    form.style.display = 'none';
-                    document.getElementById('success-box').classList.remove('hidden');
-                    form.reset();
-                } else {
-                    alert('There was a problem submitting your order. Please try again.');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Submit Payment & Order Details`;
-                }
-            } catch (error) {
-                form.style.display = 'none';
-                document.getElementById('success-box').classList.remove('hidden');
-                form.reset();
-            }
-        }
+        // Initial load
+        renderProducts(products);
     </script>
 </body>
 </html>
