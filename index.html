@@ -28,13 +28,19 @@
             <button id="menu-btn" class="text-neutral-300 hover:text-white text-xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
-            <!-- Logo & Brand Name (Aap yahan <img> tag bhi laga sakte hain) -->
+            <!-- Logo & Brand Name -->
             <div class="flex items-center space-x-2 cursor-pointer" onclick="showHome()">
                 <i class="fas fa-train text-orange-500 text-2xl"></i>
                 <span class="font-extrabold text-lg tracking-wider bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">RailX Gaming</span>
             </div>
         </div>
-        <div>
+        
+        <!-- Right Side: YouTube Button & Store Button -->
+        <div class="flex items-center space-x-3">
+            <a href="https://www.youtube.com/@RailXGamingOfficial" target="_blank" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/30 px-3 py-1.5 rounded-lg text-sm font-semibold transition flex items-center space-x-1.5">
+                <i class="fab fa-youtube text-base"></i>
+                <span class="hidden sm:inline">YouTube</span>
+            </a>
             <button onclick="openSection('store-section')" class="bg-orange-600 hover:bg-orange-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition shadow-lg shadow-orange-600/20">
                 Store
             </button>
@@ -66,6 +72,10 @@
                 <i class="fas fa-train-subway w-5 text-orange-500"></i>
                 <span>Coaches</span>
             </a>
+            <a href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fab fa-youtube w-5 text-red-500"></i>
+                <span>YouTube Channel</span>
+            </a>
         </div>
         <div class="p-4 border-t border-neutral-800 text-xs text-neutral-500 text-center">
             &copy; 2026 RailX Gaming. All rights reserved.
@@ -88,7 +98,7 @@
         </button>
     </main>
 
-    <!-- STORE SECTION (Hidden by default, shown when Store is clicked) -->
+    <!-- STORE SECTION -->
     <section id="store-section" class="hidden min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-neutral-800 pb-4">
             <h2 class="text-2xl font-bold tracking-tight text-white flex items-center">
@@ -101,14 +111,14 @@
                     <input type="text" id="search-input" oninput="filterProducts()" placeholder="Search locomotives, coaches..." class="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
                 </div>
                 <div class="flex space-x-2">
-                    <button onclick="filterCategory('all')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition active-cat">All</button>
+                    <button onclick="filterCategory('all')" class="cat-btn bg-orange-600 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">All</button>
                     <button onclick="filterCategory('loco')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Locos</button>
                     <button onclick="filterCategory('coach')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Coaches</button>
                 </div>
             </div>
         </div>
 
-        <!-- Product Grid (Clean photos with no prices) -->
+        <!-- Product Grid (Cards with Prices Visible) -->
         <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Dynamically populated via JS -->
         </div>
@@ -124,7 +134,10 @@
                 <img id="modal-img" src="" alt="Asset" class="w-full h-full object-cover">
             </div>
             <div class="p-6">
-                <span id="modal-cat" class="text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-md">Loco</span>
+                <div class="flex justify-between items-center">
+                    <span id="modal-cat" class="text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-md">Loco</span>
+                    <span id="modal-price" class="text-lg font-black text-orange-400">₹299</span>
+                </div>
                 <h3 id="modal-title" class="text-xl font-bold text-white mt-2">Product Name</h3>
                 <p id="modal-desc" class="text-neutral-400 text-sm mt-3 leading-relaxed">Detailed description of the 3D model goes here...</p>
                 <div class="mt-6 flex justify-end space-x-3">
@@ -154,7 +167,7 @@
                     <p class="font-mono font-bold text-orange-400 text-sm select-all">yourupi@oksbi</p>
                 </div>
 
-                <!-- Formspree Form (Apna Formspree URL yahan dalein) -->
+                <!-- Formspree Form -->
                 <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
                     <input type="hidden" id="checkout-product-name" name="Product_Name" value="">
                     <div>
@@ -183,12 +196,12 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // PRODUCTS LIST (Yahan aap apne products ka naam aur details change kar sakte hain)
         const products = [
             {
                 id: 1,
                 name: "WAP-7 Electric Locomotive",
                 category: "loco",
+                price: "₹299",
                 image: "https://images.unsplash.com/photo-1515165562839-978bbcfc894e?auto=format&fit=crop&w=800&q=80",
                 description: "High-detail 3D model of Indian Railways WAP-7 locomotive with realistic cab textures and animations."
             },
@@ -196,6 +209,7 @@
                 id: 2,
                 name: "LHB AC First Class Coach",
                 category: "coach",
+                price: "₹199",
                 image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
                 description: "Official LHB ICF/RCF coach 3D model optimized for MSTS and OpenRails with rich interiors."
             },
@@ -203,6 +217,7 @@
                 id: 3,
                 name: "WAG-9 Heavy Hauler",
                 category: "loco",
+                price: "₹349",
                 image: "https://images.unsplash.com/photo-1515165562839-978bbcfc894e?auto=format&fit=crop&w=800&q=80",
                 description: "Powerful freight electric locomotive model designed for heavy goods train routes in MSTS."
             },
@@ -210,6 +225,7 @@
                 id: 4,
                 name: "ICF General Sleeper Coach",
                 category: "coach",
+                price: "₹149",
                 image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
                 description: "Classic Indian Railways ICF sleeper coach with authentic exterior detailing and weathering."
             }
@@ -218,7 +234,6 @@
         let activeCategory = 'all';
         let currentSelectedProduct = null;
 
-        // Render Products on Store Screen
         function renderProducts(items) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
@@ -239,11 +254,14 @@
                         <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-orange-400 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-neutral-800">
                             ${product.category.toUpperCase()}
                         </span>
+                        <span class="absolute bottom-3 right-3 bg-orange-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-md shadow-md">
+                            ${product.price}
+                        </span>
                     </div>
                     <div class="p-5 flex flex-col flex-1 justify-between">
                         <h3 class="font-bold text-white text-lg group-hover:text-orange-400 transition">${product.name}</h3>
                         <div class="mt-4 flex items-center justify-between text-xs text-neutral-400 font-semibold">
-                            <span class="text-orange-500 flex items-center"><i class="fas fa-eye mr-1"></i> View Asset</span>
+                            <span class="text-orange-500 flex items-center"><i class="fas fa-eye mr-1"></i> View Details</span>
                             <span>MSTS / OpenRails</span>
                         </div>
                     </div>
@@ -252,7 +270,6 @@
             });
         }
 
-        // Navigation Helpers
         function showHome() {
             document.getElementById('home-screen').classList.remove('hidden');
             document.getElementById('store-section').classList.add('hidden');
@@ -266,7 +283,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Sidebar Controls
         const sidebar = document.getElementById('sidebar');
         const backdrop = document.getElementById('sidebar-backdrop');
         
@@ -283,7 +299,6 @@
         document.getElementById('close-btn').onclick = closeSidebar;
         backdrop.onclick = closeSidebar;
 
-        // Filtering & Search
         function filterCategory(cat) {
             activeCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -308,7 +323,6 @@
             renderProducts(filtered);
         }
 
-        // Modal Controls
         function openDetailModal(productId) {
             currentSelectedProduct = products.find(p => p.id === productId);
             if (!currentSelectedProduct) return;
@@ -316,6 +330,7 @@
             document.getElementById('modal-img').src = currentSelectedProduct.image;
             document.getElementById('modal-title').innerText = currentSelectedProduct.name;
             document.getElementById('modal-cat').innerText = currentSelectedProduct.category.toUpperCase();
+            document.getElementById('modal-price').innerText = currentSelectedProduct.price;
             document.getElementById('modal-desc').innerText = currentSelectedProduct.description;
 
             document.getElementById('detail-modal').classList.remove('hidden');
@@ -328,7 +343,7 @@
         function openCheckoutModal() {
             if (!currentSelectedProduct) return;
             closeDetailModal();
-            document.getElementById('checkout-product-name').value = currentSelectedProduct.name;
+            document.getElementById('checkout-product-name').value = `${currentSelectedProduct.name} (${currentSelectedProduct.price})`;
             document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
@@ -336,7 +351,6 @@
             document.getElementById('checkout-modal').classList.add('hidden');
         }
 
-        // Initial load
         renderProducts(products);
     </script>
 </body>
