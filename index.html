@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RailX Gaming - 3D Asset Store</title>
+    <title>Blox SMP - Minecraft Gaming & Server</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -30,19 +30,19 @@
             </button>
             <!-- Logo & Brand Name -->
             <div class="flex items-center space-x-2 cursor-pointer" onclick="showHome()">
-                <i class="fas fa-train text-orange-500 text-2xl"></i>
-                <span class="font-extrabold text-lg tracking-wider bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">RailX Gaming</span>
+                <i class="fas fa-cube text-emerald-500 text-2xl"></i>
+                <span class="font-extrabold text-lg tracking-wider bg-gradient-to-r from-emerald-500 to-green-400 bg-clip-text text-transparent">Blox SMP</span>
             </div>
         </div>
         
-        <!-- Right Side: YouTube Button & Store Button -->
+        <!-- Right Side: YouTube Button & Server Join Button -->
         <div class="flex items-center space-x-3">
             <a href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/30 px-3 py-1.5 rounded-lg text-sm font-semibold transition flex items-center space-x-1.5">
                 <i class="fab fa-youtube text-base"></i>
                 <span class="hidden sm:inline">YouTube</span>
             </a>
-            <button onclick="openSection('store-section')" class="bg-orange-600 hover:bg-orange-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition shadow-lg shadow-orange-600/20">
-                Store
+            <button onclick="openSection('server-section')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition shadow-lg shadow-emerald-600/20">
+                Server IP
             </button>
         </div>
     </header>
@@ -50,27 +50,23 @@
     <!-- Sliding Sidebar Menu -->
     <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-72 bg-neutral-900 border-r border-neutral-800 z-50 transform -translate-x-full flex flex-col shadow-2xl">
         <div class="flex items-center justify-between p-4 border-b border-neutral-800">
-            <span class="font-bold text-orange-500 tracking-wide">NAVIGATION</span>
+            <span class="font-bold text-emerald-500 tracking-wide">NAVIGATION</span>
             <button id="close-btn" class="text-neutral-400 hover:text-white text-lg">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <div class="p-4 flex-1 overflow-y-auto space-y-2">
             <a href="#" onclick="showHome(); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
-                <i class="fas fa-home w-5 text-orange-500"></i>
+                <i class="fas fa-home w-5 text-emerald-500"></i>
                 <span>Home</span>
             </a>
-            <a href="#" onclick="openSection('store-section', 'all'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
-                <i class="fas fa-store w-5 text-orange-500"></i>
-                <span>All Assets</span>
+            <a href="#" onclick="openSection('server-section'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fas fa-server w-5 text-emerald-500"></i>
+                <span>Server & Rules</span>
             </a>
-            <a href="#" onclick="openSection('store-section', 'loco'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
-                <i class="fas fa-subway w-5 text-orange-500"></i>
-                <span>Locomotives</span>
-            </a>
-            <a href="#" onclick="openSection('store-section', 'coach'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
-                <i class="fas fa-train-subway w-5 text-orange-500"></i>
-                <span>Coaches</span>
+            <a href="#" onclick="openSection('videos-section'); closeSidebar();" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
+                <i class="fas fa-video w-5 text-emerald-500"></i>
+                <span>YouTube Videos</span>
             </a>
             <a href="https://www.youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-neutral-800 text-neutral-300 hover:text-white transition">
                 <i class="fab fa-youtube w-5 text-red-500"></i>
@@ -78,7 +74,7 @@
             </a>
         </div>
         <div class="p-4 border-t border-neutral-800 text-xs text-neutral-500 text-center">
-            &copy; 2026 RailX Gaming. All rights reserved.
+            &copy; 2026 Blox SMP. All rights reserved.
         </div>
     </div>
 
@@ -88,210 +84,134 @@
     <!-- MAIN SCREEN (Epic Welcome Banner with Honeycomb Texture) -->
     <main id="home-screen" class="main-screen h-screen flex flex-col items-center justify-center text-center px-4 pt-16">
         <h1 class="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-wider bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent drop-shadow-2xl">
-            Welcome To RailX Gaming
+            Welcome To Blox SMP
         </h1>
         <p class="mt-4 text-neutral-400 text-sm sm:text-base max-w-md">
-            High-quality custom 3D Locomotives & Coaches for MSTS and OpenRails.
+            The ultimate Minecraft survival experience. Join our custom server and watch our epic gaming adventures!
         </p>
-        <button onclick="openSection('store-section')" class="mt-8 bg-orange-600 hover:bg-orange-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg shadow-orange-600/30 transition transform hover:-translate-y-0.5">
-            Explore 3D Assets <i class="fas fa-arrow-right ml-2"></i>
-        </button>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <button onclick="openSection('server-section')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                Join Server <i class="fas fa-server ml-2"></i>
+            </button>
+            <button onclick="openSection('videos-section')" class="bg-neutral-800 hover:bg-neutral-700 text-white font-bold px-8 py-3 rounded-xl border border-neutral-700 transition">
+                Watch Videos <i class="fas fa-play ml-2"></i>
+            </button>
+        </div>
     </main>
 
-    <!-- STORE SECTION -->
-    <section id="store-section" class="hidden min-h-screen pt-24 pb-16 px-4 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-neutral-800 pb-4">
+    <!-- SERVER DETAILS SECTION -->
+    <section id="server-section" class="hidden min-h-screen pt-24 pb-16 px-4 max-w-4xl mx-auto">
+        <div class="border-b border-neutral-800 pb-4 mb-8 flex items-center justify-between">
             <h2 class="text-2xl font-bold tracking-tight text-white flex items-center">
-                <i class="fas fa-cube text-orange-500 mr-2"></i> 3D Asset Store
+                <i class="fas fa-server text-emerald-500 mr-2"></i> Server Details & Rules
             </h2>
-            <!-- Search & Filters -->
-            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-                <div class="relative flex-1 md:w-64">
-                    <i class="fas fa-search absolute left-3 top-3.5 text-neutral-500 text-sm"></i>
-                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Search locomotives, coaches..." class="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
+            <button onclick="showHome()" class="text-xs text-neutral-400 hover:text-white bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">Back to Home</button>
+        </div>
+
+        <!-- IP Copy Card -->
+        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 mb-6 shadow-xl">
+            <h3 class="text-lg font-bold text-white mb-2">🌍 Minecraft Server IP</h3>
+            <p class="text-xs text-neutral-400 mb-4">Copy the IP address below and paste it directly into your Minecraft multiplayer menu:</p>
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-neutral-950 border border-neutral-800 p-4 rounded-xl gap-3">
+                <div>
+                    <span class="text-xs text-neutral-500 block">Java & Bedrock IP:</span>
+                    <span id="server-ip" class="font-mono font-bold text-emerald-400 text-base sm:text-lg select-all">play.bloxsmp.com</span>
                 </div>
-                <div class="flex space-x-2">
-                    <button onclick="filterCategory('all')" class="cat-btn bg-orange-600 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">All</button>
-                    <button onclick="filterCategory('loco')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Locos</button>
-                    <button onclick="filterCategory('coach')" class="cat-btn bg-neutral-800 hover:bg-orange-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Coaches</button>
-                </div>
+                <button onclick="copyIP()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-5 py-2.5 rounded-lg transition shadow-md">
+                    <i class="fas fa-copy mr-1.5"></i> Copy IP
+                </button>
+            </div>
+            <div class="mt-4 flex gap-4 text-xs text-neutral-400">
+                <span>🎮 Version: <strong>1.20+</strong></span>
+                <span>🌐 Mode: <strong>Survival SMP</strong></span>
             </div>
         </div>
 
-        <!-- Product Grid with Watermarked Images -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamically populated via JS -->
+        <!-- Rules Card -->
+        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold text-white mb-3">📜 Server Rules</h3>
+            <ul class="space-y-2 text-sm text-neutral-300 list-disc list-inside">
+                <li>Kisi ka bhi saman ya ghar bina permission ke na churayein (No Stealing/Griefing).</li>
+                <li>Hacks, X-ray ya unfair mods ka use bilkul na karein.</li>
+                <li>Chat mein gaali-galoch ya toxic behavior na karein.</li>
+                <li>Sabhi players aur members ki izzat karein.</li>
+            </ul>
         </div>
     </section>
 
-    <!-- Product Details Modal -->
-    <div id="detail-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative">
-            <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-800/80 p-2 rounded-full z-10">
-                <i class="fas fa-times"></i>
-            </button>
-            <div id="modal-image-container" class="w-full h-64 bg-neutral-950 overflow-hidden relative">
-                <img id="modal-img" src="" alt="Asset" class="w-full h-full object-cover">
-                <!-- Watermark on Modal Image -->
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
-                    <span class="text-white font-black text-2xl tracking-widest uppercase bg-black/40 px-4 py-1.5 rounded-lg border border-white/20 transform -rotate-12">
-                        RAILX GAMING
-                    </span>
+    <!-- YOUTUBE VIDEOS SECTION -->
+    <section id="videos-section" class="hidden min-h-screen pt-24 pb-16 px-4 max-w-6xl mx-auto">
+        <div class="border-b border-neutral-800 pb-4 mb-8 flex items-center justify-between">
+            <h2 class="text-2xl font-bold tracking-tight text-white flex items-center">
+                <i class="fab fa-youtube text-red-500 mr-2"></i> Latest YouTube Videos
+            </h2>
+            <button onclick="showHome()" class="text-xs text-neutral-400 hover:text-white bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">Back to Home</button>
+        </div>
+
+        <!-- Videos Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Video Card Example 1 -->
+            <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-xl flex flex-col group">
+                <div class="h-48 w-full bg-neutral-950 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1627856013091-fedde1e43463?auto=format&fit=crop&w=800&q=80" alt="Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">15:20</span>
+                </div>
+                <div class="p-5 flex flex-col flex-1 justify-between">
+                    <h3 class="font-bold text-white text-base group-hover:text-emerald-400 transition">Building Our Mega Base in Blox SMP! (Ep 1)</h3>
+                    <div class="mt-4 flex items-center justify-between text-xs text-neutral-400">
+                        <span>2.4K views • 2 days ago</span>
+                        <a href="https://youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="text-red-400 font-semibold hover:underline">Watch <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="p-6">
-                <div class="flex justify-between items-center">
-                    <span id="modal-cat" class="text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 px-2.5 py-1 rounded-md">Loco</span>
-                    <span id="modal-price" class="text-lg font-black text-orange-400">₹299</span>
+
+            <!-- Video Card Example 2 -->
+            <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-xl flex flex-col group">
+                <div class="h-48 w-full bg-neutral-950 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">12:45</span>
                 </div>
-                <h3 id="modal-title" class="text-xl font-bold text-white mt-2">Product Name</h3>
-                <p id="modal-desc" class="text-neutral-400 text-sm mt-3 leading-relaxed">Detailed description of the 3D model goes here...</p>
-                <div class="mt-6 flex justify-end space-x-3">
-                    <button onclick="closeDetailModal()" class="px-4 py-2 rounded-xl bg-neutral-800 text-neutral-300 text-sm font-semibold hover:bg-neutral-700 transition">Close</button>
-                    <button onclick="openCheckoutModal()" class="px-6 py-2 rounded-xl bg-orange-600 text-white text-sm font-semibold hover:bg-orange-500 transition shadow-lg shadow-orange-600/30">Buy Now</button>
+                <div class="p-5 flex flex-col flex-1 justify-between">
+                    <h3 class="font-bold text-white text-base group-hover:text-emerald-400 transition">Trolling My Friend in Minecraft SMP! 😂</h3>
+                    <div class="mt-4 flex items-center justify-between text-xs text-neutral-400">
+                        <span>5.1K views • 1 week ago</span>
+                        <a href="https://youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="text-red-400 font-semibold hover:underline">Watch <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card Example 3 -->
+            <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-xl flex flex-col group">
+                <div class="h-48 w-full bg-neutral-950 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=80" alt="Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">20:10</span>
+                </div>
+                <div class="p-5 flex flex-col flex-1 justify-between">
+                    <h3 class="font-bold text-white text-base group-hover:text-emerald-400 transition">Finding Diamond Armor in Hardcore SMP!</h3>
+                    <div class="mt-4 flex items-center justify-between text-xs text-neutral-400">
+                        <span>8.3K views • 2 weeks ago</span>
+                        <a href="https://youtube.com/@YOUR_CHANNEL_ID" target="_blank" class="text-red-400 font-semibold hover:underline">Watch <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Checkout Modal (Formspree + UPI + Manual Verification) -->
-    <div id="checkout-modal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
-        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-800/80 p-2 rounded-full z-10">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="p-6">
-                <h3 class="text-lg font-bold text-white mb-2">Secure UPI Checkout</h3>
-                <p class="text-xs text-neutral-400 mb-4">Scan the QR or pay via UPI ID, then submit your transaction details. Files will be sent to your email after manual verification.</p>
-                
-                <!-- UPI Details Box -->
-                <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-xl text-center mb-6">
-                    <div class="bg-white p-2 inline-block rounded-lg mb-2">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=upi://pay?pa=yourupi@oksbi&pn=RailXGaming" alt="UPI QR" class="w-32 h-32 mx-auto">
-                    </div>
-                    <p class="text-xs text-neutral-400">UPI ID:</p>
-                    <p class="font-mono font-bold text-orange-400 text-sm select-all">yourupi@oksbi</p>
-                </div>
-
-                <!-- Formspree Form for Manual Review -->
-                <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
-                    <input type="hidden" id="checkout-product-name" name="Product_Name" value="">
-                    <div>
-                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Your Name</label>
-                        <input type="text" name="Name" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Phone Number</label>
-                        <input type="tel" name="Phone" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Email Address (For file delivery)</label>
-                        <input type="email" name="Email" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-neutral-400 mb-1">Transaction ID / UTR Number</label>
-                        <input type="text" name="Transaction_ID" required placeholder="Enter actual UPI reference / Txn ID" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500">
-                    </div>
-                    <button type="submit" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-lg shadow-orange-600/30">
-                        Submit for Verification
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- JavaScript Logic -->
     <script>
-        const products = [
-            {
-                id: 1,
-                name: "WAP-7 Electric Locomotive",
-                category: "loco",
-                price: "₹299",
-                image: "https://images.unsplash.com/photo-1515165562839-978bbcfc894e?auto=format&fit=crop&w=800&q=80",
-                description: "High-detail 3D model of Indian Railways WAP-7 locomotive with realistic cab textures and animations."
-            },
-            {
-                id: 2,
-                name: "LHB AC First Class Coach",
-                category: "coach",
-                price: "₹199",
-                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
-                description: "Official LHB ICF/RCF coach 3D model optimized for MSTS and OpenRails with rich interiors."
-            },
-            {
-                id: 3,
-                name: "WAG-9 Heavy Hauler",
-                category: "loco",
-                price: "₹349",
-                image: "https://images.unsplash.com/photo-1515165562839-978bbcfc894e?auto=format&fit=crop&w=800&q=80",
-                description: "Powerful freight electric locomotive model designed for heavy goods train routes in MSTS."
-            },
-            {
-                id: 4,
-                name: "ICF General Sleeper Coach",
-                category: "coach",
-                price: "₹149",
-                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
-                description: "Classic Indian Railways ICF sleeper coach with authentic exterior detailing and weathering."
-            }
-        ];
-
-        let activeCategory = 'all';
-        let currentSelectedProduct = null;
-
-        function renderProducts(items) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-
-            if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-neutral-500">No assets found matching your search.</div>`;
-                return;
-            }
-
-            items.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden shadow-xl hover:border-orange-500/50 transition duration-300 flex flex-col group cursor-pointer';
-                card.onclick = () => openDetailModal(product.id);
-
-                card.innerHTML = `
-                    <div class="h-52 w-full overflow-hidden relative bg-neutral-950">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <!-- Watermark Overlay -->
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
-                            <span class="text-white font-black text-lg tracking-widest uppercase bg-black/40 px-3 py-1 rounded-md border border-white/25 transform -rotate-12">
-                                RAILX GAMING
-                            </span>
-                        </div>
-                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-orange-400 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-neutral-800 z-10">
-                            ${product.category.toUpperCase()}
-                        </span>
-                        <span class="absolute bottom-3 right-3 bg-orange-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-md shadow-md z-10">
-                            ${product.price}
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1 justify-between">
-                        <h3 class="font-bold text-white text-lg group-hover:text-orange-400 transition">${product.name}</h3>
-                        <div class="mt-4 flex items-center justify-between text-xs text-neutral-400 font-semibold">
-                            <span class="text-orange-500 flex items-center"><i class="fas fa-eye mr-1"></i> View Details</span>
-                            <span>MSTS / OpenRails</span>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
         function showHome() {
             document.getElementById('home-screen').classList.remove('hidden');
-            document.getElementById('store-section').classList.add('hidden');
+            document.getElementById('server-section').classList.add('hidden');
+            document.getElementById('videos-section').classList.add('hidden');
             window.scrollTo(0, 0);
         }
 
-        function openSection(sectionId, category = 'all') {
+        function openSection(sectionId) {
             document.getElementById('home-screen').classList.add('hidden');
-            document.getElementById('store-section').classList.remove('hidden');
-            filterCategory(category);
+            document.getElementById('server-section').classList.add('hidden');
+            document.getElementById('videos-section').classList.add('hidden');
+            
+            document.getElementById(sectionId).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
@@ -311,59 +231,11 @@
         document.getElementById('close-btn').onclick = closeSidebar;
         backdrop.onclick = closeSidebar;
 
-        function filterCategory(cat) {
-            activeCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-orange-600', 'text-white');
-                btn.classList.add('bg-neutral-800', 'text-neutral-300');
-            });
-            event && event.target && event.target.classList.add('bg-orange-600', 'text-white');
-            applyFilters();
+        function copyIP() {
+            const ipText = document.getElementById('server-ip').innerText;
+            navigator.clipboard.writeText(ipText);
+            alert('Server IP Copied: ' + ipText);
         }
-
-        function filterProducts() {
-            applyFilters();
-        }
-
-        function applyFilters() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const filtered = products.filter(p => {
-                const matchesCategory = (activeCategory === 'all' || p.category === activeCategory);
-                const matchesQuery = p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
-                return matchesCategory && matchesQuery;
-            });
-            renderProducts(filtered);
-        }
-
-        function openDetailModal(productId) {
-            currentSelectedProduct = products.find(p => p.id === productId);
-            if (!currentSelectedProduct) return;
-
-            document.getElementById('modal-img').src = currentSelectedProduct.image;
-            document.getElementById('modal-title').innerText = currentSelectedProduct.name;
-            document.getElementById('modal-cat').innerText = currentSelectedProduct.category.toUpperCase();
-            document.getElementById('modal-price').innerText = currentSelectedProduct.price;
-            document.getElementById('modal-desc').innerText = currentSelectedProduct.description;
-
-            document.getElementById('detail-modal').classList.remove('hidden');
-        }
-
-        function closeDetailModal() {
-            document.getElementById('detail-modal').classList.add('hidden');
-        }
-
-        function openCheckoutModal() {
-            if (!currentSelectedProduct) return;
-            closeDetailModal();
-            document.getElementById('checkout-product-name').value = `${currentSelectedProduct.name} (${currentSelectedProduct.price})`;
-            document.getElementById('checkout-modal').classList.remove('hidden');
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.add('hidden');
-        }
-
-        renderProducts(products);
     </script>
 </body>
 </html>
